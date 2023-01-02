@@ -20,10 +20,16 @@
         print "<td>".$row->email."</td>";
         print "<td>".$row->date_birth."</td>";
         print "<td>
-                  <button onclick=\"location.href='?page=update&id=".$row->id."'\" class='btn btn-success'>
+                  <button class='btn btn-success' onclick=\"location.href='?page=update&id=".$row->id."'\">
                     Editar
                   </button>
-                  <button class='btn btn-danger'>
+                  <button class='btn btn-danger' 
+                    onclick=\" 
+                      if(confirm('Tem certeza que deseja excluir $row->name')) {
+                        location.href='?page=save&action=delete&id=".$row->id."';
+                      }
+                     \" >
+                    
                     Exluir
                   </button>
               </td>";

@@ -1,6 +1,6 @@
 <?php
   switch ($_REQUEST["action"]) {
-    case 'new':
+    case 'save':
       $name = $_POST["name"];
       $email = $_POST["email"];
       $password = md5($_POST["password"]);
@@ -22,12 +22,7 @@
       $password = md5($_POST["password"]);
       $date_birth = $_POST["date_birth"];
 
-      $sql = "UPDATE users SET 
-          name='{$name}', 
-          email='{$email}', 
-          password='{$password}', 
-          date_birth='{$date_birth}' 
-        WHERE id=" . $_REQUEST["id"];
+      $sql = "UPDATE users SET name='{$name}', email='{$email}', password='{$password}', date_birth='{$date_birth}' WHERE id=".$_REQUEST["id"];
 
       $response = $conn->query($sql);
       
@@ -40,7 +35,16 @@
       }
       break;
     case 'delete':
-      # code...
+      $sql = "DELETE FROM users WHERE id=".$_REQUEST["id"];
+      $response = $conn->query($sql);
+      
+      if ($response) {
+        print "<script>alert('Usuário excluído com sucesso')</script>";
+        print "<script>location.href='?page=list_user'</script>";
+      } else {
+        print "<script>alert('Houve um erro ao excluir usuário')</script>";
+        print "<script>location.href='?page=list_user'</script>";
+      }      
       break;
     default:
       # code...

@@ -3,11 +3,9 @@
   $sql = "SELECT * FROM users WHERE id =".$_REQUEST["id"];
   $response = $conn->query($sql);
   $row = $response->fetch_object();
-
-  // print_r($row);
 ?>
-<form action="?page=update" method="POST">
-  <input type="hidden" name="update" value="update">
+<form action="?page=save" method="POST">
+  <input type="hidden" name="action" value="update">
   <input type="hidden" name="id" value="<?= $row->id ?>">
   <div class="mb-3">
     <label for="name">Nome</label>
@@ -19,7 +17,7 @@
   </div>
   <div class="mb-3">
     <label for="password">Password</label>
-    <input type="password" name="password" class="form-control" value="<?=$row->password?>" required>
+    <input type="password" name="password" class="form-control" required>
   </div>
   <div class="mb-3">
     <label for="date_birth">Data de nascimento</label>
